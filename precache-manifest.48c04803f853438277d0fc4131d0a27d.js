@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5c025b4d22c8afcb809224e044e9dd07",
+    "revision": "327726bb61636eb88203a4804209249d",
     "url": "/golden-rule/index.html"
   },
   {
-    "revision": "75ec916be950e3899193",
-    "url": "/golden-rule/static/css/main.a5e038a2.chunk.css"
+    "revision": "291c3ad56737aa0f393d",
+    "url": "/golden-rule/static/css/main.e21707bd.chunk.css"
   },
   {
     "revision": "691f957d312003e091b9",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/golden-rule/static/js/2.d201bccf.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "75ec916be950e3899193",
+    "revision": "291c3ad56737aa0f393d",
     "url": "/golden-rule/static/js/main.038deda4.chunk.js"
   },
   {
