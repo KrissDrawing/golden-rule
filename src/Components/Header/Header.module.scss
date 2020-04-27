@@ -1,0 +1,27 @@
+@import "../../globalVariables.scss";
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 20vw 1fr 20vw;
+  align-items: center;
+  background-color: $secondary-color;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+}
+
+@media (max-width: 768px) {
+  .logo {
+    display: none;
+  }
+  .wrapper {
+    width: 100vw;
+    grid-template-columns: 1fr;
+    margin: auto;
+    & Button {
+      display: none;
+    }
+  }
+}

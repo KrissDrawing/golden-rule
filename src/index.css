@@ -1,13 +1,54 @@
+@import url("https://fonts.googleapis.com/css?family=Overpass&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: "Overpass", sans-serif;
+}
+
+html,
+#root {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.Footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.item-appear,
+.item-enter {
+  opacity: 0;
+  top: -100%;
+}
+.item-appear-active,
+.item-enter-active {
+  opacity: 1;
+  top: 0;
+  transition: all 500ms ease-out;
+}
+.item-exit {
+  opacity: 1;
+  top: 0;
+}
+.item-exit.item-exit-active {
+  opacity: 0;
+  top: 100%;
+  transition: all 500ms ease-out;
+  /* transition: opacity 300ms linear; */
 }

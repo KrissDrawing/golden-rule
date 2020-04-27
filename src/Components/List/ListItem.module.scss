@@ -1,0 +1,52 @@
+@import "../../globalVariables.scss";
+
+.wrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  margin: 5px 0px;
+  padding: 0px 30px 0 0;
+  border: 1px solid $base-color;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  font-size: 10px;
+  transition: all 1s ease;
+
+  &Active {
+    @extend .wrapper;
+    background-color: $base-color;
+    color: #fff;
+    height: 50px;
+    transition: all 1s ease;
+  }
+
+  &Plan {
+    @extend .wrapper;
+    height: 100%;
+
+    & Button {
+      position: absolute;
+      background-color: rgb(255, 255, 255);
+      right: -1px;
+      top: 0;
+      height: 100%;
+      width: 30px;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+.wrapper h1 {
+  margin: 0px 10px 0px;
+  padding: 0px;
+}
+
+li {
+}
+
+button {
+}

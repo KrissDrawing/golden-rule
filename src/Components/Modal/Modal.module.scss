@@ -1,0 +1,56 @@
+.wrapper {
+  padding: 70px 80px 50px;
+  top: 10%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 20vw;
+  min-width: 400px;
+  background-color: white;
+  box-shadow: 0 20px 40px -5px rgba(#b0e596, 0.3);
+  position: fixed;
+  z-index: 999;
+}
+.temp {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.8);
+  top: 0;
+  left: 50px;
+  transform: translateY(150px) rotate(-30deg);
+  z-index: 1000;
+}
+
+.closeButton {
+  width: 27px;
+  height: 27px;
+  background: #b0e596;
+  border: none;
+  position: absolute;
+  right: 30px;
+  top: 30px;
+
+  &::before,
+  &::after {
+    content: "";
+    width: 16px;
+    height: 2px;
+    position: absolute;
+    background: white;
+    display: block;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    transform-origin: 50%;
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+}

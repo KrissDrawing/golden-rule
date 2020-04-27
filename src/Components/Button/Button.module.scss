@@ -1,0 +1,31 @@
+@import "../../globalVariables.scss";
+
+.button {
+  width: 120px;
+  height: 50px;
+  background: none;
+  border: 2px solid $base-color;
+  color: $base-color;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: $base-color;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+    color: white;
+  }
+}
+
+.secondary {
+  @extend .button;
+  background-color: $base-color;
+  color: white;
+
+  &:hover {
+    background-color: #fff;
+    transition: all 0.3s ease;
+    color: $base-color;
+  }
+}
