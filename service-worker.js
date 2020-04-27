@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/golden-rule/precache-manifest.ae30407de874efcbe7cf80ebddc6f100.js"
+  "/golden-rule/precache-manifest.1bc8011ffe140cfc570d0f01dab05f7b.js"
 );
 
 self.addEventListener('message', (event) => {
