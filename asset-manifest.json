@@ -1,22 +1,13 @@
 {
-  "files": {
-    "main.css": "/golden-rule/static/css/main.e21707bd.chunk.css",
-    "main.js": "/golden-rule/static/js/main.038deda4.chunk.js",
-    "main.js.map": "/golden-rule/static/js/main.038deda4.chunk.js.map",
-    "runtime-main.js": "/golden-rule/static/js/runtime-main.963be966.js",
-    "runtime-main.js.map": "/golden-rule/static/js/runtime-main.963be966.js.map",
-    "static/js/2.d201bccf.chunk.js": "/golden-rule/static/js/2.d201bccf.chunk.js",
-    "static/js/2.d201bccf.chunk.js.map": "/golden-rule/static/js/2.d201bccf.chunk.js.map",
-    "index.html": "/golden-rule/index.html",
-    "precache-manifest.48c04803f853438277d0fc4131d0a27d.js": "/golden-rule/precache-manifest.48c04803f853438277d0fc4131d0a27d.js",
-    "service-worker.js": "/golden-rule/service-worker.js",
-    "static/css/main.e21707bd.chunk.css.map": "/golden-rule/static/css/main.e21707bd.chunk.css.map",
-    "static/js/2.d201bccf.chunk.js.LICENSE.txt": "/golden-rule/static/js/2.d201bccf.chunk.js.LICENSE.txt"
-  },
-  "entrypoints": [
-    "static/js/runtime-main.963be966.js",
-    "static/js/2.d201bccf.chunk.js",
-    "static/css/main.e21707bd.chunk.css",
-    "static/js/main.038deda4.chunk.js"
-  ]
+  "main.css": "/golden-rule/static/css/main.eb90fcc9.chunk.css",
+  "main.js": "/golden-rule/static/js/main.1d89a5ca.chunk.js",
+  "main.js.map": "/golden-rule/static/js/main.1d89a5ca.chunk.js.map",
+  "runtime~main.js": "/golden-rule/static/js/runtime~main.2544b02c.js",
+  "runtime~main.js.map": "/golden-rule/static/js/runtime~main.2544b02c.js.map",
+  "static/js/2.c5d67210.chunk.js": "/golden-rule/static/js/2.c5d67210.chunk.js",
+  "static/js/2.c5d67210.chunk.js.map": "/golden-rule/static/js/2.c5d67210.chunk.js.map",
+  "index.html": "/golden-rule/index.html",
+  "precache-manifest.dc65b00f6c281329e944533b87e4fe01.js": "/golden-rule/precache-manifest.dc65b00f6c281329e944533b87e4fe01.js",
+  "service-worker.js": "/golden-rule/service-worker.js",
+  "static/css/main.eb90fcc9.chunk.css.map": "/golden-rule/static/css/main.eb90fcc9.chunk.css.map"
 }

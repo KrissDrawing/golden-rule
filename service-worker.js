@@ -11,19 +11,13 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/golden-rule/precache-manifest.48c04803f853438277d0fc4131d0a27d.js"
+  "/golden-rule/precache-manifest.dc65b00f6c281329e944533b87e4fe01.js"
 );
 
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
-  }
-});
-
-workbox.core.clientsClaim();
+workbox.clientsClaim();
 
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
@@ -31,9 +25,10 @@ workbox.core.clientsClaim();
  * See https://goo.gl/S9QRab
  */
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
+workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("/golden-rule/index.html"), {
+workbox.routing.registerNavigationRoute("/golden-rule/index.html", {
   
-  blacklist: [/^\/_/,/\/[^/?]+\.[^/]+$/],
+  blacklist: [/^\/_/,/\/[^/]+\.[^/]+$/],
 });
