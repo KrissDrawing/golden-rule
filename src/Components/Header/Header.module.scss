@@ -21,7 +21,9 @@
     grid-template-columns: 1fr;
     margin: auto;
     & Button {
-      display: none;
+      width: 100%;
+      height: 130%;
+      // display: none;
     }
   }
 }

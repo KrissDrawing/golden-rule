@@ -5,12 +5,13 @@ import AppContext from "../../context";
 import styles from "./TaskInputForm.module.scss";
 import { db } from "../../base";
 import { AuthContext } from "../../Auth";
+import uniqid from "uniqid";
 
 class TaskInputForm extends React.Component {
   state = {
     title: "",
     id: "",
-    activeItem: false,
+    active: false,
   };
 
   handleInputChange = (e) => {
@@ -25,17 +26,20 @@ class TaskInputForm extends React.Component {
 
   submitFirebase = (e) => {
     let { currentUser } = this.context;
-    e.preventDefault();
-    db.collection("users")
-      .doc(currentUser.uid)
-      .collection("task")
-      .add(this.state)
-      .then(
-        this.setState({
-          title: "",
-          activeItem: false,
-        })
-      );
+    if (currentUser !== null) {
+      e.preventDefault();
+      db.collection("users")
+        .doc(currentUser.uid)
+        .collection("task")
+        .add({ ...this.state, date: Date.now(), id: uniqid() })
+        .then(
+          this.setState({
+            title: "",
+            id: "",
+            active: false,
+          })
+        );
+    }
   };
 
   render() {
@@ -49,9 +53,9 @@ class TaskInputForm extends React.Component {
             onSubmit={(e) => {
               this.setState({
                 title: "",
-                activeItem: false,
+                active: false,
               });
-              // this.submitFirebase(e);
+              this.submitFirebase(e);
               context.addItem(e, this.state);
             }}
           >

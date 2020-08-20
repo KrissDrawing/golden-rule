@@ -2,11 +2,11 @@ import React, { useCallback, useContext, useEffect } from "react";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import app from "../../base";
-import { withRouter, Redirect } from "react-router-dom";
-import { AuthContext, AuthProvider } from "../../Auth";
+import { withRouter } from "react-router-dom";
+import { AuthContext } from "../../Auth";
 import AppContext from "../../context";
 import { db } from "../../base";
-import context from "../../context";
+import styles from "./SignForm.module.scss";
 
 const SignForm = ({ history, register, closeModalFn }) => {
   const handleSingUp = useCallback(
@@ -38,9 +38,7 @@ const SignForm = ({ history, register, closeModalFn }) => {
       event.preventDefault();
       const { email, password } = event.target.elements;
       try {
-        await app
-          .auth()
-          .signInWithEmailAndPassword(email.value, password.value);
+        await app.auth().signInWithEmailAndPassword(email.value, password.value);
         history.push("/log");
         await appCon.populateList(currentUser);
       } catch (error) {
@@ -50,26 +48,13 @@ const SignForm = ({ history, register, closeModalFn }) => {
     [history]
   );
 
-  const logIn = async (fn) => {
-    await handleLogIn();
-    fn();
-  };
-
   const { currentUser } = useContext(AuthContext);
   const appCon = useContext(AppContext);
 
   return (
     <AppContext.Consumer>
       {(context) => (
-        <form
-          onSubmit={
-            register ? handleSingUp : handleLogIn
-            // async() => {
-            //   await handleLogIn,
-            //   ()=>context.populateList
-            // }
-          }
-        >
+        <form class={styles.wrapper} onSubmit={register ? handleSingUp : handleLogIn}>
           <Input label="e-mail" name="email" type="email" />
           <Input label="password" name="password" type="password" />
           <Button>{register ? "Register" : "Log-in"}</Button>

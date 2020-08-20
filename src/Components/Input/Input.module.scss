@@ -65,3 +65,9 @@ input:focus + .label::after,
 input:valid + .label::after {
   transform: translateX(0%);
 }
+
+@media (max-width: 768px) {
+  .formItem {
+    margin-bottom: 5px;
+  }
+}

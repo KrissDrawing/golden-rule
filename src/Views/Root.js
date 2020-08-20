@@ -7,12 +7,10 @@ import TimerPlayer from "../Components/Timer/TimerPlayer";
 import Header from "../Components/Header/Header";
 import Modal from "../Components/Modal/Modal";
 import Footer from "../Components/Footer/Footer";
-import { Provider } from "react-redux";
-import store from "../store/store";
 import LogView from "../Views/LogView/LogView";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import styles from "./Root.module.scss";
-import { AuthProvider } from "../Auth";
+import { AuthContext } from "../Auth";
 import { db } from "../base";
 
 class Root extends React.Component {
@@ -23,6 +21,7 @@ class Root extends React.Component {
     activeItem: 0,
     isModalOpen: false,
     startTimer: 0,
+    uid: "",
   };
 
   openModal = () => {
@@ -37,6 +36,10 @@ class Root extends React.Component {
     });
   };
 
+  clearTaskList = () => {
+    this.setState({ task: [] });
+  };
+
   addItem = (e, newItem) => {
     e.preventDefault();
     newItem = {
@@ -45,34 +48,28 @@ class Root extends React.Component {
       active: newItem.active,
     };
     this.setState((prevState) => ({
-      ["task"]: [...prevState["task"], newItem],
+      task: [...prevState["task"], newItem],
     }));
-
-    //this.closeModal();
   };
 
   deleteItems = (id) => {
     const list = [...this.state.task];
-    const updatedList = list.filter((item) => item.id != id);
+    const updatedList = list.filter((item) => item.id !== id);
 
     this.setState({ task: updatedList });
   };
 
-  setActive = () => {
-    this.setState({});
-  };
-
   addMinute = () => {
-    this.state.count += 60;
+    this.setState((prevState) => ({ count: (prevState.count += 60) }));
     console.log(this.state.count);
   };
 
   resetTimer = () => {
-    this.state.count = 300;
+    this.setState({ count: 300 });
   };
 
   startTimerFn = () => {
-    if (this.state.task.length == 0) {
+    if (this.state.task.length === 0) {
       alert("Add some tasks firtst.");
     } else {
       this.setState({
@@ -100,33 +97,15 @@ class Root extends React.Component {
       db.collection("users")
         .doc(user.uid)
         .collection("task")
+        .orderBy("date", "asc")
         .get()
         .then((snapshot) => {
           let dbList = snapshot.docs.map((doc) => doc.data());
-
           this.setState({
             task: dbList,
           });
         });
     }
-  };
-
-  test = (user) => {
-    db.collection("users")
-      .doc(user.uid)
-      .collection("task")
-      .onSnapshot((snapshot) => {
-        const newTask = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
-        console.log(newTask);
-
-        this.setState({
-          task: newTask,
-        });
-      });
   };
 
   render() {
@@ -145,64 +124,36 @@ class Root extends React.Component {
     };
 
     return (
-      <Provider store={store}>
-        <HashRouter basename="/">
-          <AppContext.Provider
-            value={contextElements}
-            time={count}
-            activeItem={this.activeItem}
-          >
-            <Header openModalFn={this.openModal} />
-            <TimerPlayer
-              startTimer={this.state.startTimer}
-              activeItem={this.state.activeItem}
-              task={this.state.task}
-            />
-
-            <AuthProvider>
-              {isModalOpen && <Modal closeModalFn={this.closeModal} />}
-              <Route
-                render={({ location }) => (
-                  <TransitionGroup>
-                    <CSSTransition
-                      key={location.key}
-                      timeout={500}
-                      classNames="item"
-                    >
-                      <Switch location={location}>
-                        <Route exact path="/" component={TimerView} />
-                        <Route exact path="/plan" component={PlanView} />
-                        <Route exact path="/log" component={LogView} />
-                      </Switch>
-                    </CSSTransition>
-                  </TransitionGroup>
-                )}
-              />
-            </AuthProvider>
-          </AppContext.Provider>
-          <Footer className={styles.wrapper} />
-        </HashRouter>
-      </Provider>
+      <HashRouter basename="/">
+        <AppContext.Provider value={contextElements} time={count} activeItem={this.activeItem}>
+          <Header openModalFn={this.openModal} clearTaskList={this.clearTaskList} />
+          <TimerPlayer
+            startTimer={this.state.startTimer}
+            activeItem={this.state.activeItem}
+            task={this.state.task}
+          />
+          {isModalOpen && <Modal closeModalFn={this.closeModal} />}
+          {/* {console.log(this.context.currentUser)} */}
+          <Route
+            render={({ location }) => (
+              <TransitionGroup>
+                <CSSTransition key={location.key} timeout={500} classNames="item">
+                  <Switch location={location}>
+                    <Route exact path="/" component={TimerView} />
+                    <Route exact path="/plan" component={PlanView} />
+                    <Route exact path="/log" component={LogView} />
+                  </Switch>
+                </CSSTransition>
+              </TransitionGroup>
+            )}
+          />
+        </AppContext.Provider>
+        <Footer className={styles.wrapper} />
+      </HashRouter>
     );
   }
 
   componentDidMount() {
-    // db.collection("users")
-    //   .doc("mRbIa403ioUmhlkuMhtkY7u5Ncz1")
-    //   .collection("task")
-    //   .onSnapshot((snapshot) => {
-    //     const newTask = snapshot.docs.map((doc) => ({
-    //       id: doc.id,
-    //       ...doc.data(),
-    //     }));
-
-    //     console.log(newTask);
-
-    //     this.setState({
-    //       task: newTask,
-    //     });
-    //   });
-    // this.populateList();
     this.myInterval = setInterval(() => {
       if (this.state.activeItem >= this.state.task.length) {
         this.pauseTimer();
@@ -223,9 +174,20 @@ class Root extends React.Component {
     }, 1000);
   }
 
+  componentDidUpdate(previousProps, previousState) {
+    if (previousState.uid !== this.context.currentUser) {
+      this.setState({ uid: this.context.currentUser });
+      this.context.currentUser !== null
+        ? this.populateList(this.context.currentUser)
+        : console.log("nie ma bumbap");
+    }
+  }
+
   componentWillUnmount() {
     clearInterval(this.myInterval);
   }
 }
+
+Root.contextType = AuthContext;
 
 export default Root;

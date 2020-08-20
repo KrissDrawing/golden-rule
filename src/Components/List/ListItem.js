@@ -16,8 +16,13 @@ const ListItem = ({ title, id, deleteItems, plan, activeItem }) => {
         db.collection("users")
           .doc(currentUser.uid)
           .collection("task")
-          .doc(id)
-          .delete()
+          .where("id", "==", id)
+          .get()
+          .then((snapshot) => {
+            snapshot.forEach((doc) => {
+              doc.ref.delete();
+            });
+          })
           .then(function () {
             console.log("Document successfully deleted!");
           })
@@ -31,7 +36,16 @@ const ListItem = ({ title, id, deleteItems, plan, activeItem }) => {
   return (
     <li className={plan ? styles.wrapperPlan : active}>
       <h1>{title}</h1>
-      {plan && <Button onClick={() => deleteItems(id)}>X</Button>}
+      {plan && (
+        <Button
+          onClick={() => {
+            deleteItems(id);
+            deletefb(id);
+          }}
+        >
+          X
+        </Button>
+      )}
     </li>
   );
 };
