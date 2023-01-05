@@ -12,7 +12,7 @@
     "react-dom": "^16.13.0",
     "react-perfect-scrollbar": "^1.5.8",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^2.1.8",
+    "react-scripts": "^5.0.1",
     "react-transition-group": "^4.3.0",
     "redux": "^4.0.5",
     "uniqid": "^5.2.0"
